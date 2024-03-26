@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlsn:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaCircle</title>
+</head>
+<body>
+    <h1>CinemaCircle</h1>
+    <h3>Welcome to CinemaCircle</h3>
+    <p>Description coming soon<p>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Director</th>
+            <th>Length</th>
+        </tr>
+
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.name}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td th:text="${movie.desc}"></td>
+            <td th:text="${movie.director}"></td>
+            <td th:text="${movie.Length}"></td>
+        </tr>
+    </table>
+    
+    <button><a href="/add_new_movie">Add a new movie to the website</a></button>
+    <p></p>
+    <button><a href="/collections">Movie Collections</a></button>
+</body>
+</html>

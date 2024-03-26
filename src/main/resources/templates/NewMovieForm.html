@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlsn:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaCircle</title>
+</head>
+<body>
+    <h1>CinemaCircle</h1>
+
+    <form action="#" th:action="@{/save}" th:object="${movie}" method="post">
+        <p><input type="hidden" th:field="*{movieId}" /></p>
+        <p><input type="text" placeholder="Title" th:field="*{name}" /></p>
+        <p><input type="text" placeholder="Genre" th:field="*{genre}" /></p>
+        <p><input type="text" placeholder="Description" th:field="*{desc}" /></p>
+        <p><input type="text" placeholder="Director" th:field="*{director}" /></p>
+        <p><input type="text" placeholder="Lenght (min)" th:field="*{length}" /></p>
+        <p><input type="submit" value="Save"></input></p>
+        <p><a href="/home">back</a></p>
+    </form>
+</body>
+</html>
