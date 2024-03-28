@@ -1,13 +1,20 @@
 package hh.sof3.cinemacircle.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name = "movie")
+@Table(name = "Movie")
 public class Movie {
 
     //Attributes
@@ -20,6 +27,14 @@ public class Movie {
         private String desc;
         private String director;
         private String length;
+
+        @ManyToMany(cascade = { CascadeType.MERGE })
+        @JoinTable(
+            name = "Movie_StreamingService",
+            joinColumns = { @JoinColumn(name = "movieId") },
+            inverseJoinColumns =  { @JoinColumn(name = "serviceId") }
+        )
+        List<StreamingService> streamingServices = new ArrayList<>();
 
     //Constructor
 
@@ -42,6 +57,11 @@ public class Movie {
             this.desc = null;
             this.director = null;
             this.length = null;
+            this.streamingServices = null;
+        }
+
+        public void inServices(StreamingService service){
+            streamingServices.add(service);
         }
 
     //Setters
@@ -70,6 +90,10 @@ public class Movie {
             this.length = length;
         }
 
+        public void setStreamingService(List<StreamingService> streamingService) {
+            this.streamingServices = streamingService;
+        }
+
     //Getters
 
         public Long getMovieId() {
@@ -96,6 +120,10 @@ public class Movie {
             return length;
         }
 
+        public List<StreamingService> getStreamingService() {
+            return streamingServices;
+        }
+
         //ToString
 
         @Override
@@ -104,5 +132,4 @@ public class Movie {
                     + ", length=" + length + "]";
         }
 
-        
 }

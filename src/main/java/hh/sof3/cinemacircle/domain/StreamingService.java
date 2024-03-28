@@ -1,13 +1,17 @@
 package hh.sof3.cinemacircle.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "streaming_service")
+@Table(name = "Streaming_Service")
 public class StreamingService {
 
     //Attributes
@@ -16,6 +20,9 @@ public class StreamingService {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceId;
     private String serviceName;
+
+    @ManyToMany(mappedBy = "streamingServices")
+    private List<Movie> movies = new ArrayList<>();
 
     //Constructor
 
@@ -32,6 +39,10 @@ public class StreamingService {
         this.serviceName = null;
     }
 
+    public void hasMovie(Movie movie) {
+        movies.add(movie);
+    }
+
     //Setters
 
     public void setServiceId(Long serviceId) {
@@ -42,14 +53,22 @@ public class StreamingService {
         this.serviceName = serviceName;
     }
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
     //Getters
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 
     public Long getServiceId() {
         return serviceId;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public List<Movie> getMovies() {
+        return movies;
     }
 
     //toString

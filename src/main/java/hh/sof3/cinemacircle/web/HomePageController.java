@@ -28,10 +28,10 @@ public class HomePageController {
         return "Home"; // Home.html
     }
 
-    @GetMapping(value = "/collections")
-    public String collectionPage() {
-        return "Collections"; //Collections.html
-    }
+    //@GetMapping(value = "/collections")
+    //public String collectionPage() {
+        //return "Collections"; //Collections.html
+    //}
 
     @GetMapping(value = "/add_new_movie")
     public String addNewMovie(Model model) {

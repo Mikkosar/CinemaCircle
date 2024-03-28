@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import hh.sof3.cinemacircle.domain.Movie;
@@ -51,6 +52,9 @@ public class CinemacircleApplication {
 				)
 			);
 
+			movies.get(0).inServices(netflix);
+			movies.get(0).inServices(disneyPlus);
+
 			movies.add(
 				new Movie(
 					"Raging Bull",
@@ -60,6 +64,8 @@ public class CinemacircleApplication {
 					"129min"
 				)
 			);
+
+			movies.get(1).inServices(hbo);
 
 			movies.add(
 				new Movie(
@@ -71,6 +77,8 @@ public class CinemacircleApplication {
 				)
 			);
 
+			movies.get(2).inServices(disneyPlus);
+
 			movies.add(
 				new Movie(
 					"Come And See",
@@ -81,6 +89,9 @@ public class CinemacircleApplication {
 				)
 			);
 
+			movies.get(3).inServices(hbo);
+			movies.get(3).inServices(netflix);
+
 			movies.add(
 				new Movie(
 					"Awakenings",
@@ -90,6 +101,8 @@ public class CinemacircleApplication {
 					"121min"
 				)
 			);
+
+			movies.get(4).inServices(netflix);
 
 			movieRepository.saveAll(movies);
 		};
