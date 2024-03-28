@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import hh.sof3.cinemacircle.domain.Movie;
 import hh.sof3.cinemacircle.domain.MovieRepository;
+import hh.sof3.cinemacircle.domain.StreamingService;
+import hh.sof3.cinemacircle.domain.StreamingServiceRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,6 +23,9 @@ public class HomePageController {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private StreamingServiceRepository streamingServiceRepository;
+
     @GetMapping(value = "/home")
     public String homePage(Model model) {
 
@@ -28,15 +34,16 @@ public class HomePageController {
         return "Home"; // Home.html
     }
 
-    //@GetMapping(value = "/collections")
-    //public String collectionPage() {
-        //return "Collections"; //Collections.html
-    //}
+    @GetMapping(value = "/collections")
+    public String collectionPage() {
+        return "Collections"; //Collections.html
+    }
 
     @GetMapping(value = "/add_new_movie")
     public String addNewMovie(Model model) {
 
         model.addAttribute("movie", new Movie());
+        model.addAttribute("services", streamingServiceRepository.findAll());
 
         return "NewMovieForm"; //NewMovieForm.html
     }

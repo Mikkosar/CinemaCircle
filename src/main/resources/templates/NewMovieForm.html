@@ -15,6 +15,16 @@
         <p><input type="text" placeholder="Description" th:field="*{desc}" /></p>
         <p><input type="text" placeholder="Director" th:field="*{director}" /></p>
         <p><input type="text" placeholder="Lenght (min)" th:field="*{length}" /></p>
+        <p>
+            <label for="deplist">Where To Watch</label>
+            <select id="deplist" th:field="*{streamingService}">
+                <option
+                    th:each="service : ${services}"
+                    th:value="${service.serviceId}"
+                    th:text="${service.serviceName}"
+                ></option>
+            </select>
+        </p>
         <p><input type="submit" value="Save"></input></p>
         <p><a href="/home">back</a></p>
     </form>

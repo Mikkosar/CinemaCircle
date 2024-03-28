@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,7 +22,7 @@ public class Movie {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long movieId;
+        private Long movieid;
         private String name;
         private String genre;
         private String desc;
@@ -51,7 +52,7 @@ public class Movie {
 
         public Movie() {
             super();
-            this.movieId = null;
+            this.movieid = null;
             this.name = null;
             this.genre = null;
             this.desc = null;
@@ -67,7 +68,7 @@ public class Movie {
     //Setters
 
         public void setMovieId(Long movieId) {
-            this.movieId = movieId;
+            this.movieid = movieId;
         }
 
         public void setName(String name) {
@@ -97,7 +98,7 @@ public class Movie {
     //Getters
 
         public Long getMovieId() {
-            return movieId;
+            return movieid;
         }
 
         public String getName() {

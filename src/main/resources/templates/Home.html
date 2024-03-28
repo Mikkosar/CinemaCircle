@@ -17,7 +17,8 @@
             <th>Description</th>
             <th>Director</th>
             <th>Length</th>
-            
+            <th>Where to watch</th>
+
         </tr>
 
         <tr th:each="movie : ${movies}">
@@ -26,6 +27,7 @@
             <td th:text="${movie.desc}"></td>
             <td th:text="${movie.director}"></td>
             <td th:text="${movie.Length}"></td>
+            <td th:text="${movie.streamingService}"></td>
         </tr>
     </table>
     

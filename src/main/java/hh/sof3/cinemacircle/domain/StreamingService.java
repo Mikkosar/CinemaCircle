@@ -18,8 +18,8 @@ public class StreamingService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long serviceId;
-    private String serviceName;
+    private Long serviceid;
+    private String servicename;
 
     @ManyToMany(mappedBy = "streamingServices")
     private List<Movie> movies = new ArrayList<>();
@@ -28,15 +28,15 @@ public class StreamingService {
 
     public StreamingService(String serviceName) {
         super();
-        this.serviceName = serviceName;
+        this.servicename = serviceName;
     }
 
     //Null Constructor
 
     public StreamingService() {
         super();
-        this.serviceId = null;
-        this.serviceName = null;
+        this.serviceid = null;
+        this.servicename = null;
     }
 
     public void hasMovie(Movie movie) {
@@ -46,25 +46,25 @@ public class StreamingService {
     //Setters
 
     public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+        this.serviceid = serviceId;
     }
 
     public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+        this.servicename = serviceName;
     }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    //Getters
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 
+    //Getters
+
     public Long getServiceId() {
-        return serviceId;
+        return serviceid;
+    }
+
+    public String getServiceName() {
+        return servicename;
     }
 
     public List<Movie> getMovies() {
@@ -75,7 +75,7 @@ public class StreamingService {
 
     @Override
     public String toString() {
-        return "StreamingService [serviceName=" + serviceName + "]";
+        return "StreamingService [serviceName=" + servicename + "]";
     }
 
 }
