@@ -8,8 +8,25 @@
 <body>
     <h1>CinemaCircle</h1>
 
-    <tr>
-        <th>Collections</th>
-    </tr>
+    <h3>Collections</h3>
+
+    <table>
+        <tr>
+            <th>List ID</th>
+            <th>Collections</th>
+            <th>Description</th>
+        </tr>
+
+        <tr th:each="collection : ${collections}">
+            <td th:text="${collection.listid}"></td>
+            <td th:text="${collection.name}"></td>
+            <td th:text="${collection.desc}"></td>
+            <td><button><a th:href="@{/opencollection/{id}(id=${collection.listid})}">Open</a></button></td>
+        </tr>
+    </table>
+
+    <p><button><a href="/newcollection">Create A New Collection</a></button></p>
+
+    <p><button><a href="/home">Back</a></button></p>
 </body>
 </html>

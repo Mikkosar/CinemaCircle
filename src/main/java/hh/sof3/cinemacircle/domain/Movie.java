@@ -37,6 +37,9 @@ public class Movie {
         )
         List<StreamingService> streamingServices = new ArrayList<>();
 
+        @ManyToMany(mappedBy = "movies")
+        List<MovieList> movieLists = new ArrayList<>();
+
     //Constructor
 
         public Movie(String name, String genre, String desc, String director, String length) {
@@ -61,8 +64,12 @@ public class Movie {
             this.streamingServices = null;
         }
 
-        public void inServices(StreamingService service){
+        public void inServices(StreamingService service) {
             streamingServices.add(service);
+        }
+
+        public void inList(MovieList list) {
+            movieLists.add(list);
         }
 
     //Setters
@@ -125,12 +132,11 @@ public class Movie {
             return streamingServices;
         }
 
-        //ToString
+    //ToString
 
         @Override
         public String toString() {
             return "Movie [name=" + name + ", genre=" + genre + ", desc=" + desc + ", director=" + director
-                    + ", length=" + length + "]";
+                    + ", length=" + length + ", streamingServices=" + streamingServices + "]";
         }
-
 }
