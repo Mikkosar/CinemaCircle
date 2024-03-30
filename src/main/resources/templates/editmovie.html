@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlsn:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,33 +9,28 @@
 </head>
 <body>
     <div class="container-xxl">
-
         <h1 class="display-1">CinemaCircle</h1>
 
-        <h3 class="display-6">Add A New Movie</h3>
+        <h3 class="display-6">Edit Movie</h3>
 
-        <p class="text">Here you can add a movie to the site</p>
+        <p class="text">Here you can edit existing movie from the site</p>
 
-        <form class="movieform" action="#" th:action="@{/save}" th:object="${movie}" method="post">
-            <p><input type="hidden" th:field="*{movieId}" /></p>
-            <p><input type="text" placeholder="Title" th:field="*{name}" /></p>
+        <form action="#" th:action="@{/save}" th:object="${movie}" method="post">
+            <p><input type="hidden" th:field="*{movieId}" id="movieId" readonly="readonly"/></p>
+            <p><input type="text" placeholder="Name" th:field="*{name}" /></p>
             <p><input type="text" placeholder="Genre" th:field="*{genre}" /></p>
             <p><input type="text" placeholder="Description" th:field="*{desc}" /></p>
             <p><input type="text" placeholder="Director" th:field="*{director}" /></p>
-            <p><input type="text" placeholder="Length (min)" th:field="*{length}" /></p>
+            <p><input type="text" placeholder="Length" th:field="*{Length}" /></p>
             <p>
                 <label for="deplist">Where To Watch</label>
-                <table class="table align-middle" th:object="${services}">
-                    <tr>
-                        <th>Streaming service</th>
-                        <th></th>
-                    </tr>
-            
-                    <tr th:each="service : ${services}">
-                        <td th:text="${service.serviceName}"></td>
-                        <td><input type="checkbox" th:value="${service.serviceId}" th:name="selectedServices"/></td>
-                    </tr>
-                </table>
+                <select id="deplist" th:field="*{streamingService}">
+                    <option
+                        th:each="service : ${services}"
+                        th:value="${service.serviceId}"
+                        th:text="${service.serviceName}"
+                    ></option>
+                </select>
             </p>
             <p class="movieformsavebutton"><input class="btn btn-outline-success" type="submit" value="Save"></input></p>
         </form>

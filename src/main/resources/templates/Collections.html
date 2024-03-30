@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="\css\bootstrap-5.3.3-dist\css\bootstrap.min.css" th:href="@{\css\bootstrap-5.3.3-dist\css\bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="\css\csslocations.css" th:href="@{\css\csslocations.css}" />
     <title>CinemaCircle</title>
 </head>
 <body>
-    <h1>CinemaCircle</h1>
+    <div class="container-xxl">
+        <h1 class="display-1">CinemaCircle</h1>
 
-    <h3>Collections</h3>
+        <h3 class="display-6">Collections</h3>
 
-    <table>
-        <tr>
-            <th>List ID</th>
-            <th>Collections</th>
-            <th>Description</th>
-        </tr>
+        <p class="text">Coming soon!</p>
 
-        <tr th:each="collection : ${collections}">
-            <td th:text="${collection.listid}"></td>
-            <td th:text="${collection.name}"></td>
-            <td th:text="${collection.desc}"></td>
-            <td><button><a th:href="@{/opencollection/{id}(id=${collection.listid})}">Open</a></button></td>
-        </tr>
-    </table>
+        <table class="table align-middle">
+            <tr>
+                <th>List ID</th>
+                <th>Collections</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
 
-    <p><button><a href="/newcollection">Create A New Collection</a></button></p>
+            <tr th:each="collection : ${collections}">
+                <td th:text="${collection.listid}"></td>
+                <td th:text="${collection.name}"></td>
+                <td th:text="${collection.desc}"></td>
+                <td><button class="btn btn-outline-secondary"><a th:href="@{/opencollection/{id}(id=${collection.listid})}">Open</a></button></td>
+                <td><button class="btn btn-outline-secondary"><a th:href="@{/editcollection/{id}(id=${collection.listid})}">Edit</a></button></td>
+            </tr>
+        </table>
 
-    <p><button><a href="/home">Back</a></button></p>
+        <p><button class="btn btn-outline-secondary"><a href="/newcollection">Create A New Collection</a></button></p>
+
+        <p><button class="btn btn-outline-secondary"><a href="/home">Back</a></button></p>
+    </div>
 </body>
 </html>

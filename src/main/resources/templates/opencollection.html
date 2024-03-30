@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="\css\bootstrap-5.3.3-dist\css\bootstrap.min.css" th:href="@{\css\bootstrap-5.3.3-dist\css\bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="\css\csslocations.css" th:href="@{\css\csslocations.css}" />
     <title>Document</title>
 </head>
 <body>
-    <h1>CinemaCircle</h1>
+    <div class="container-xxl">
+        <h1 class="display-1">CinemaCircle</h1>
 
-    <h3>Collection Name</h3>
-    <p th:text="${collection.name}"></p>
+        <h3 class="display-6">Collection Name</h3>
+        <p class="text" th:text="${collection.name}"></p>
 
-    <h3>Collection Description</h3>
-    <p th:text="${collection.desc}"></p>
+        <h3 class="display-6">Collection Description</h3>
+        <p class="text" th:text="${collection.desc}"></p>
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Director</th>
-            <th>Length</th>
-        </tr>
-        
-        <tr th:each="movie : ${movies}">
-            <td th:text="${movie.name}"></td>
-            <td th:text="${movie.director}"></td>
-            <td th:text="${movie.length}">
-        </tr>
-    </table>
+        <table class="table align-middle">
+            <tr>
+                <th>Name</th>
+                <th>Director</th>
+                <th>Length</th>
+            </tr>
+            
+            <tr th:each="movie : ${movies}">
+                <td th:text="${movie.name}"></td>
+                <td th:text="${movie.director}"></td>
+                <td th:text="${movie.length}">
+            </tr>
+        </table>
 
-    <p><button><a href="/collections">Back</a></button></p>
-    <p><button><a href="/home">Back To Home</a></button></p>
+        <p><button class="btn btn-outline-secondary"><a href="/collections">Back</a></button></p>
+        <p><button class="btn btn-outline-secondary"><a href="/home">Back To Home</a></button></p>
+    </div>
 </body>
 </html>

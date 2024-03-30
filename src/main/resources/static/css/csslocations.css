@@ -1,0 +1,41 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.text {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.buttonleft {
+    text-align: left;
+}
+
+.buttonright {
+    text-align: right;
+}
+
+p {
+    text-align: center;
+}
+
+.movieform {
+    margin-top: 50px;
+}
+
+.movieformsavebutton {
+    margin-top: 50px;
+    text-align: center;
+}

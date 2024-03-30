@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="\css\bootstrap-5.3.3-dist\css\bootstrap.min.css" th:href="@{\css\bootstrap-5.3.3-dist\css\bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="\css\csslocations.css" th:href="@{\css\csslocations.css}" />
+    <title>CinemaCircle</title>
+</head>
+<body>
+    <div class="container-xxl">
+        <h1 class="display-1">CinemaCircle</h1>
+
+        <h3 class="display-3">Create A New Movie Collection</h3>
+
+        <p class="text">Here you can make your own movie collection</p>
+
+        <form action="#" th:action="@{/savecollection}" th:object="${collection}" method="post">
+            <p><input type="hidden" th:field="*{listid}"/></p>
+            <p><input type="text" placeholder="Name*" th:field="*{name}"/></p>
+            <p><input type="text" placeholder="Description" th:field="*{desc}"/></p>
+            
+            <p><input class="btn btn-outline-success" type="submit" value="Save"></input></p>
+
+            <table class="table align-middle" th:object="${collection}">
+                <tr>
+                    <th>Title</th>
+                    <th>Director</th>
+                    <th></th>
+                </tr>
+        
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.name}"></td>
+                    <td th:text="${movie.director}"></td>
+                    <td><input type="checkbox" th:value="${movie.movieId}" th:name="selectedMovies"/></td>
+                </tr>
+            </table>
+
+            <p><input class="btn btn-outline-success" type="submit" value="Save"></input></p>
+        </form>
+
+        <p><button class="btn btn-outline-secondary"><a href="/collections">Back</a></button></p>
+    </div>
+</body>
+</html>

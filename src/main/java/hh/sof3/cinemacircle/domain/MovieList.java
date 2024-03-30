@@ -2,6 +2,9 @@ package hh.sof3.cinemacircle.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -11,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class MovieList {
@@ -31,17 +35,23 @@ public class MovieList {
         )
         List<Movie> movies = new ArrayList<>();
 
+        @ManyToOne
+        @JsonIgnoreProperties ("collections")
+        @JoinColumn(name = "id") // FK
+        private User user;
+
     //Constructor
 
-        public MovieList(String name, String desc) {
+        public MovieList(String name, String desc, User user) {
             this.name = name;
             this.desc = desc;
+            this.user = user;
         }
 
     //Null Constructor
 
         public MovieList() {
-
+            super();
         }
 
         public void hasMovie(Movie movie) {
@@ -49,6 +59,10 @@ public class MovieList {
         }
 
     //Setters
+
+        public void setListid(Long listid) {
+            this.listid = listid;
+        }
 
         public void setMovieid(Long listid) {
             this.listid = listid;
@@ -62,7 +76,16 @@ public class MovieList {
             this.desc = desc;
         }
 
+        public void setMovies(List<Movie> movies) {
+            this.movies = movies;
+        }
+        
+        public void setUser(User user) {
+            this.user = user;
+        }
+
     //Getters
+
 
         public Long getListid() {
             return listid;
@@ -80,6 +103,9 @@ public class MovieList {
             return movies;
         }
 
+        public User getUser() {
+            return user;
+        }
 
     //ToString
 

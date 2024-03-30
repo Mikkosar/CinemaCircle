@@ -3,35 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="\css\bootstrap-5.3.3-dist\css\bootstrap.min.css" th:href="@{\css\bootstrap-5.3.3-dist\css\bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="\css\csslocations.css" th:href="@{\css\csslocations.css}" />
     <title>CinemaCircle</title>
+
+
 </head>
 <body>
-    <h1>CinemaCircle</h1>
-    <h3>Welcome to CinemaCircle</h3>
-    <p>Description coming soon<p>
+    <div class="container-xxl">
+        <h1 class="display-1">CinemaCircle</h1>
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Description</th>
-            <th>Director</th>
-            <th>Length</th>
-            <th>Where to watch</th>
+        <h3 class="display-6">Welcome to CinemaCircle</h3>
 
-        </tr>
+        <p class="text">
+            On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, 
+            so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, 
+            which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, 
+            when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided.                        
+            But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. 
+            The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains
+        <p>
 
-        <tr th:each="movie : ${movies}">
-            <td th:text="${movie.name}"></td>
-            <td th:text="${movie.genre}"></td>
-            <td th:text="${movie.desc}"></td>
-            <td th:text="${movie.director}"></td>
-            <td th:text="${movie.Length}"></td>
-            <td th:text="${movie.streamingService}"></td>
-        </tr>
-    </table>
-    
-    <p><button><a href="/addnewmovie">Add A New Movie To The Website</a></button></p>
-    <p></p><button><a href="/collections">Movie Collections</a></button></p>
+        <table class="table align-middle">
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Description</th>
+                <th>Director</th>
+                <th>Length</th>
+                <th>Where to watch</th>
+                <th></th>
+                <th></th>
+                
+
+            </tr>
+
+            <tr th:each="movie : ${movies}">
+                <td th:text="${movie.name}"></td>
+                <td th:text="${movie.genre}"></td>
+                <td th:text="${movie.desc}"></td>
+                <td th:text="${movie.director}"></td>
+                <td th:text="${movie.Length}"></td>
+                <td>
+                    <span th:each="service, iterStat : ${movie.streamingService}">
+                        <span th:text="${service.serviceName}"></span>
+                        <span th:unless="${iterStat.last}"><br></span>
+                    </span>
+                </td>
+                <td><button class="btn btn-outline-danger"><a th:href="@{/deletemovie/{id}(id=${movie.movieId})}">Delete</a></button></td>
+                <td><button class="btn btn-outline-secondary"><a th:href="@{/editmovie/{id}(id=${movie.movieId})}">Edit</a></button></td>
+            </tr>
+        </table>
+
+        <p><button class="btn btn-outline-secondary"><a href="/addnewmovie">Add A New Movie To The Website</a></button></p>
+        <p><button class="btn btn-outline-secondary"><a href="/collections">Movie Collections</a></button></p>
+    </div>
+
 </body>
 </html>

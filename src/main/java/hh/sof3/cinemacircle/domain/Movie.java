@@ -61,7 +61,6 @@ public class Movie {
             this.desc = null;
             this.director = null;
             this.length = null;
-            this.streamingServices = null;
         }
 
         public void inServices(StreamingService service) {
@@ -132,7 +131,12 @@ public class Movie {
             return streamingServices;
         }
 
+        public List<MovieList> getMovieLists() {
+            return movieLists;
+        }
+
     //ToString
+
 
         @Override
         public String toString() {

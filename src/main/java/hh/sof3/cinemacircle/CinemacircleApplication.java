@@ -17,6 +17,8 @@ import hh.sof3.cinemacircle.domain.MovieListRepository;
 import hh.sof3.cinemacircle.domain.MovieRepository;
 import hh.sof3.cinemacircle.domain.StreamingService;
 import hh.sof3.cinemacircle.domain.StreamingServiceRepository;
+import hh.sof3.cinemacircle.domain.User;
+import hh.sof3.cinemacircle.domain.UserRepository;
 
 @SpringBootApplication
 public class CinemacircleApplication {
@@ -28,8 +30,27 @@ public class CinemacircleApplication {
 	}
 
 	@Bean
-	public CommandLineRunner Cinemacircle(MovieRepository movieRepository, StreamingServiceRepository serviceRepository, MovieListRepository movieListRepository) {
+	public CommandLineRunner Cinemacircle(MovieRepository movieRepository, StreamingServiceRepository serviceRepository, MovieListRepository movieListRepository, UserRepository userRepository) {
 		return (args) -> {
+
+			User user1 = new User(
+				"user",
+				"$2a$10$EvJ2ncP4KWQfT4JRjCqMdu/xE0UXxE7lq3JYs8tcyG8ajvmTWmhjO",
+				"user@gmail.com",
+				"USER",
+				null
+			);
+			User user2 = new User(
+				"admin",
+				"$2a$10$EvJ2ncP4KWQfT4JRjCqMdu/xE0UXxE7lq3JYs8tcyG8ajvmTWmhjO",
+				"admin@gmail.com",
+				"ADMIN",
+				null
+			);
+
+			userRepository.save(user1);
+			userRepository.save(user2);
+
 
 			log.info("Lets save couple of streaming services");
 
@@ -108,8 +129,8 @@ public class CinemacircleApplication {
 
 			movieRepository.saveAll(movies);
 
-			MovieList list1 = new MovieList("Watched", "My collection of movies that I have seen and like to share");
-			MovieList list2 = new MovieList("TodoList", "Movies that I need to see");
+			MovieList list1 = new MovieList("Watched", "My collection of movies that I have seen and like to share", user1);
+			MovieList list2 = new MovieList("TodoList", "Movies that I need to see", user2);
 
 			list1.hasMovie(movieRepository.findByName("Come And See").get(0));
 			list1.hasMovie(movieRepository.findByName("Awakenings").get(0));
@@ -118,9 +139,10 @@ public class CinemacircleApplication {
 			list2.hasMovie(movieRepository.findByName("Shining").get(0));
 			list2.hasMovie(movieRepository.findByName("Stalker").get(0));
 
-
 			movieListRepository.save(list1);
 			movieListRepository.save(list2);
+
+
 
 		};
 	}
