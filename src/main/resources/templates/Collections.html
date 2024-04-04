@@ -29,11 +29,24 @@
                 <td th:text="${collection.name}"></td>
                 <td th:text="${collection.desc}"></td>
                 <td><button class="btn btn-outline-secondary"><a th:href="@{/opencollection/{id}(id=${collection.listid})}">Open</a></button></td>
-                <td><button class="btn btn-outline-secondary"><a th:href="@{/editcollection/{id}(id=${collection.listid})}">Edit</a></button></td>
+
+                <div th:if="${currentUser != null}">
+                    <td th:if="${collection.user.id == currentUser.id || currentUser.role == 'ADMIN'}">
+                        <button class="btn btn-outline-secondary">
+                            <a th:href="@{/editcollection/{id}(id=${collection.listid})}">Edit</a>
+                        </button>
+                    </td>
+                    
+                    <td th:if="${collection.user.id == currentUser.id || currentUser.role == 'ADMIN'}">
+                        <button class="btn btn-outline-danger">
+                            <a th:href="@{/deletecollection/{id}(id=${collection.listid})}">Delete</a>
+                        </button>
+                    </td>
+                </div>
             </tr>
         </table>
 
-        <p><button class="btn btn-outline-secondary"><a href="/newcollection">Create A New Collection</a></button></p>
+        <p><button class="btn btn-outline-secondary" sec:authorize="hasAnyAuthority('ADMIN', 'USER')"><a href="/newcollection">Create A New Collection</a></button></p>
 
         <p><button class="btn btn-outline-secondary"><a href="/home">Back</a></button></p>
     </div>

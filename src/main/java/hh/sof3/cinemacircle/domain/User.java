@@ -3,6 +3,8 @@ package hh.sof3.cinemacircle.domain;
 import java.util.List;
 import java.util.Locale.Category;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -70,7 +72,8 @@ public class User {
         }
 
         public void setPasswordHash(String passwordHash) {
-            this.passwordHash = passwordHash;
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            this.passwordHash = passwordEncoder.encode(passwordHash);
         }
 
         public void setEmail(String email) {

@@ -42,7 +42,7 @@ public class CinemacircleApplication {
 			);
 			User user2 = new User(
 				"admin",
-				"$2a$10$EvJ2ncP4KWQfT4JRjCqMdu/xE0UXxE7lq3JYs8tcyG8ajvmTWmhjO",
+				"$2a$10$.k2oh.7jnBQV/mByN8rtIO6zSQvSx/mhgQ5JqcmmT7HwZqloBEfhm",
 				"admin@gmail.com",
 				"ADMIN",
 				null

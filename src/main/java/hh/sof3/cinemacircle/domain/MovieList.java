@@ -57,6 +57,7 @@ public class MovieList {
         public void hasMovie(Movie movie) {
             movies.add(movie);
         }
+        
 
     //Setters
 
