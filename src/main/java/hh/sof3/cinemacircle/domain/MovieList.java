@@ -2,8 +2,8 @@ package hh.sof3.cinemacircle.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -27,6 +27,7 @@ public class MovieList {
         private String name;
         private String desc;
 
+        @JsonIgnore
         @ManyToMany(cascade = { CascadeType.MERGE })
         @JoinTable(
             name = "Movies_MovieLists",
@@ -35,8 +36,8 @@ public class MovieList {
         )
         List<Movie> movies = new ArrayList<>();
 
+        @JsonIgnore
         @ManyToOne
-        @JsonIgnoreProperties ("collections")
         @JoinColumn(name = "id") // FK
         private User user;
 

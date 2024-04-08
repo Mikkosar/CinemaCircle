@@ -3,6 +3,9 @@ package hh.sof3.cinemacircle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +24,7 @@ public class StreamingService {
     private Long serviceid;
     private String servicename;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "streamingServices")
     private List<Movie> movies = new ArrayList<>();
 

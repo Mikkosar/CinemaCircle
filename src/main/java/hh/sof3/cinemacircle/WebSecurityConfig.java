@@ -32,7 +32,10 @@ public class WebSecurityConfig {
             .requestMatchers(antMatcher("/home")).permitAll()
             .requestMatchers(antMatcher("/collections")).permitAll()
             .requestMatchers(antMatcher("/signup")).permitAll()
-            .requestMatchers(antMatcher("/saveuser")).permitAll()
+            .requestMatchers(antMatcher("/signup")).permitAll()
+            .requestMatchers(antMatcher("/movies")).permitAll()
+            .requestMatchers(antMatcher("/movie/{id}")).permitAll()
+            .requestMatchers(antMatcher("/savemovie")).permitAll()
             .requestMatchers(antMatcher("/moviedetails/{id}")).permitAll()
             .requestMatchers(antMatcher("/opencollection/{id}")).permitAll()
             .requestMatchers(toH2Console()).permitAll()
@@ -51,8 +54,8 @@ public class WebSecurityConfig {
                 .permitAll()
             )
             .logout( logout -> logout
-                .logoutUrl("/logout") // Configure the logout URL
-                .logoutSuccessUrl("/home") // Redirect to /home after logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/home")
                 .permitAll()
             );
         return http.build();

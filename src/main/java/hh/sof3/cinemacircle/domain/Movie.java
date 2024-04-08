@@ -3,6 +3,9 @@ package hh.sof3.cinemacircle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +32,7 @@ public class Movie {
         private String director;
         private String length;
 
+        @JsonIgnore
         @ManyToMany(cascade = { CascadeType.MERGE })
         @JoinTable(
             name = "Movie_StreamingService",
@@ -37,6 +41,7 @@ public class Movie {
         )
         List<StreamingService> streamingServices = new ArrayList<>();
 
+        @JsonIgnore
         @ManyToMany(mappedBy = "movies")
         List<MovieList> movieLists = new ArrayList<>();
 
@@ -65,10 +70,6 @@ public class Movie {
 
         public void inServices(StreamingService service) {
             streamingServices.add(service);
-        }
-
-        public void inList(MovieList list) {
-            movieLists.add(list);
         }
 
     //Setters

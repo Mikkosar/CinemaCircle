@@ -16,7 +16,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
         <h3 class="display-6">Welcome to CinemaCircle</h3>
 
-        <p><button class="btn btn-outline-secondary"><a href="/login">Login</a></button><button class="btn btn-outline-secondary"><a href="/logout">Logout</a></button><button class="btn btn-outline-secondary"><a href="/signup">Sign Up</a></button></p>
+        <p>
+            <button class="btn btn-outline-secondary"><a href="/login">Login</a></button>
+            <button class="btn btn-outline-secondary"><a href="/signup">Sign Up</a></button>
+        </p>
+
+        <div th:if="${currentUser != null}">
+            <form class="logoutButton" th:action="@{/logout}" method="post">
+                <input class="btn btn-outline-secondary" type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+        <div th:if="${currentUser != null}">
+            <h3 class="display-6">Hello <span th:text="${currentUser.username}"></span>!</h3>
+        </div>
 
         <p class="text">
             On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, 
