@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class MovieList {
@@ -24,10 +25,10 @@ public class MovieList {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long listid;
+        @NotBlank
         private String name;
         private String desc;
 
-        @JsonIgnore
         @ManyToMany(cascade = { CascadeType.MERGE })
         @JoinTable(
             name = "Movies_MovieLists",

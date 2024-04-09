@@ -15,6 +15,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.GenerationType;
 
 @Entity
@@ -26,10 +29,17 @@ public class Movie {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long movieid;
+
+        @NotBlank
         private String name;
+
         private String genre;
+
         private String desc;
+
+        @NotBlank
         private String director;
+
         private String length;
 
         @JsonIgnore
@@ -59,13 +69,7 @@ public class Movie {
     //Null Constructor
 
         public Movie() {
-            super();
-            this.movieid = null;
-            this.name = null;
-            this.genre = null;
-            this.desc = null;
-            this.director = null;
-            this.length = null;
+
         }
 
         public void inServices(StreamingService service) {

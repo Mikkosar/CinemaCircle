@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import hh.sof3.cinemacircle.domain.Movie;
 import hh.sof3.cinemacircle.domain.MovieList;
 import hh.sof3.cinemacircle.domain.MovieRepository;
 import hh.sof3.cinemacircle.domain.StreamingServiceRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class MovieControllers {
@@ -43,24 +45,29 @@ public class MovieControllers {
 
         @PostMapping(value = "/save")
         @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-        public String saveMovie(@ModelAttribute Movie movie, @RequestParam(name = "selectedServices", required = false) List<Long> selectedServicesIds) {
+        public String saveMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam(name = "selectedServices", required = false) List<Long> selectedServicesIds, Model model) {
 
-            if (movie.getName() != "" && movie.getDirector() != ""){ 
-                if (selectedServicesIds == null) {
-
-                    movieRepository.save(movie);
-
-                    return "redirect:/home";
-                }
-
-                for (Long id : selectedServicesIds) {
-                    movie.inServices(streamingServiceRepository.findById(id).orElse(null));
-                }
-
-                movieRepository.save(movie);
+            if (bindingResult.hasErrors()) { 
+                model.addAttribute("movie", movie);
+                model.addAttribute("services", streamingServiceRepository.findAll());
+                return "newMovieForm";
             }
 
+            if (selectedServicesIds == null) {
+
+                movieRepository.save(movie);
+
+                return "redirect:/home";
+            }
+
+            for (Long id : selectedServicesIds) {
+                movie.inServices(streamingServiceRepository.findById(id).orElse(null));
+            }
+
+            movieRepository.save(movie);
+            
             return "redirect:/home";
+    
         }
 
         @GetMapping(value = "/moviedetails/{id}")

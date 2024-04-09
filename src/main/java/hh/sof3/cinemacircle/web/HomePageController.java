@@ -5,11 +5,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import hh.sof3.cinemacircle.domain.MovieRepository;
 import hh.sof3.cinemacircle.domain.UserRepository;
+import jakarta.validation.Valid;
 import hh.sof3.cinemacircle.domain.User;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,11 +54,15 @@ public class HomePageController {
     }
 
     @PostMapping(value = "/saveuser")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
 
-        user.setRole("USER");
-        userRepository.save(user);
-
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
+            return "singup"; // singup.html
+        }
+            user.setRole("USER");
+            userRepository.save(user);
+        
         return "redirect:/home";
     }
     

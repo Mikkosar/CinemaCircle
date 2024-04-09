@@ -8,5 +8,5 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
 
     // peritään findAll(), finsId(), deleteById(), save();
 
-    List<Movie> findByName(String title);
+    List<Movie> findByName(String name);
 }

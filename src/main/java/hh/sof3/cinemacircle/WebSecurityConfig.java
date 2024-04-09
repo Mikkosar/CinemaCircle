@@ -32,7 +32,7 @@ public class WebSecurityConfig {
             .requestMatchers(antMatcher("/home")).permitAll()
             .requestMatchers(antMatcher("/collections")).permitAll()
             .requestMatchers(antMatcher("/signup")).permitAll()
-            .requestMatchers(antMatcher("/signup")).permitAll()
+            .requestMatchers(antMatcher("/saveuser")).permitAll()
             .requestMatchers(antMatcher("/movies")).permitAll()
             .requestMatchers(antMatcher("/movie/{id}")).permitAll()
             .requestMatchers(antMatcher("/savemovie")).permitAll()

@@ -2,6 +2,7 @@ package hh.sof3.cinemacircle.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import hh.sof3.cinemacircle.domain.MovieListRepository;
 import hh.sof3.cinemacircle.domain.MovieRepository;
 import hh.sof3.cinemacircle.domain.User;
 import hh.sof3.cinemacircle.domain.UserRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class CollectionsController {
@@ -93,8 +95,6 @@ public class CollectionsController {
             MovieList movieList = movieListRepository.findById(id).orElse(null);
             if (movieList != null && movieList.getUser().getUsername().equals(currentUserName) || user.getRole().equals("ADMIN")) {
                 movieListRepository.deleteById(id);
-            } else {
-                return "error";
             }
     
             return "redirect:/collections";
@@ -127,8 +127,14 @@ public class CollectionsController {
 
         @PostMapping(value = "/savecollection")
         @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-        public String saveNewCollection(@ModelAttribute MovieList movieList, @RequestParam(name = "selectedMovies", required = false) List<Long> selectedMoviesIds) {
+        public String saveNewCollection(@Valid @ModelAttribute("collection") MovieList movieList, BindingResult bindingResult, @RequestParam(name = "selectedMovies", required = false) List<Long> selectedMoviesIds, Model model) {
 
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("collection", movieList);
+                model.addAttribute("movies", movieRepository.findAll());
+                return "newcollectionform";
+            }
+            
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentUserName = authentication.getName();
             User currentUser = userRepository.findByUsername(currentUserName);

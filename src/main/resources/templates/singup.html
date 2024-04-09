@@ -16,8 +16,11 @@
         <form action="#" th:action="@{/saveuser}" th:object="${user}" method="post">
             <p><input type="hidden" th:field="*{id}" /></p>
             <p><input type="text" placeholder="Username" th:field="*{username}" /></p>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
             <p><input type="text" placeholder="Password" th:field="*{passwordHash}" /></p>
+            <p th:if="${#fields.hasErrors('passwordHash')}" th:errors="*{passwordHash}">Error</p>
             <p><input type="text" placeholder="Email" th:field="*{email}" /></p>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
             <p><input class="btn btn-outline-success" type="submit" value="Save"></input></p>
         </form>
     </div>

@@ -16,6 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "users")
 public class User {
@@ -27,13 +29,18 @@ public class User {
         @Column(name = "id", nullable = false, updatable = false)
         private Long id;
 
+        
         @Column(name = "username", nullable = false, unique = true)
+        @NotBlank
         private String username;
 
         @Column(name = "password", nullable = false)
+        @NotBlank
         private String passwordHash;
 
+        
         @Column(name = "email")
+        @NotBlank
         private String email;
 
         @Column(name = "role", nullable = false)
@@ -46,19 +53,19 @@ public class User {
 
     //Constructor
 
-        public User(String username, String passwordHash, String email, String role, List<MovieList> collections) {
+        public User(String username, String passwordHash, String email, String role) {
             super();
             this.username = username;
             this.passwordHash = passwordHash;
             this.email = email;
             this.role = role;
-            this.collections = collections;
         }
 
     //Null Constructor
 
         public User() {
-
+            super();
+            this.passwordHash = null;
         }
 
     //Setters
@@ -72,8 +79,10 @@ public class User {
         }
 
         public void setPasswordHash(String passwordHash) {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            this.passwordHash = passwordEncoder.encode(passwordHash);
+            if (passwordHash != null && !passwordHash.isEmpty()) {
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                this.passwordHash = passwordEncoder.encode(passwordHash);
+            }
         }
 
         public void setEmail(String email) {
