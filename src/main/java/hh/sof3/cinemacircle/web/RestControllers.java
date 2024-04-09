@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import hh.sof3.cinemacircle.domain.Movie;
+import hh.sof3.cinemacircle.domain.MovieList;
+import hh.sof3.cinemacircle.domain.MovieListRepository;
 import hh.sof3.cinemacircle.domain.MovieRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,18 +26,32 @@ public class RestControllers {
     @Autowired
     private MovieRepository movieRepository;
 
-    @GetMapping(value = "/movies")
-    public @ResponseBody List<Movie> findAllMovies() {
-        return (List<Movie>) movieRepository.findAll();
-    }
+    @Autowired
+    private MovieListRepository movieListRepository;
 
-    @GetMapping(value = "/movie/{id}")
-    public @ResponseBody Movie bookById(@PathVariable("id") Long movieid) {
-        return movieRepository.findById(movieid).orElse(null);
-    }
+    // RESTful services for movie entity
 
-    @PostMapping(value = "/savemovie")
-    public @ResponseBody Movie saveMovie(@RequestBody Movie movie) {
-        return movieRepository.save(movie);
-    }
+        @GetMapping(value = "/movies")
+        public @ResponseBody List<Movie> findAllMovies() {
+            return (List<Movie>) movieRepository.findAll();
+        }
+
+        @GetMapping(value = "/movie/{id}")
+        public @ResponseBody Movie bookById(@PathVariable("id") Long movieid) {
+            return movieRepository.findById(movieid).orElse(null);
+        }
+
+        @PostMapping(value = "/savemovie")
+        public @ResponseBody Movie saveMovie(@RequestBody Movie movie) {
+            return movieRepository.save(movie);
+        }
+
+    //RESTful services for movielists
+
+        @GetMapping(value = "/movielists")
+        public @ResponseBody List<MovieList> findAllMovieLists() {
+            return (List<MovieList>) movieListRepository.findAll();
+        }
+
+        
 }

@@ -142,6 +142,6 @@ public class Movie {
         @Override
         public String toString() {
             return "Movie [name=" + name + ", genre=" + genre + ", desc=" + desc + ", director=" + director
-                    + ", length=" + length + ", streamingServices=" + streamingServices + "]";
+                    + ", length=" + length + "]";
         }
 }
